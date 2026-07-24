@@ -15,24 +15,25 @@ const tocSections = [
 
 export default function SideToc() {
   const [activeId, setActiveId] = useState('');
-  const [visible, setVisible] = useState(false);
   const scrollTo = useSmoothScroll();
 
   useEffect(() => {
     const ids = tocSections.map((s) => s.id);
-    const handleScroll = () => {
-      // Show after hero
-      setVisible(window.scrollY > window.innerHeight * 0.6);
 
-      const scrollY = window.scrollY + 120;
-      let current = ids[0];
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (el && el.offsetTop <= scrollY) {
-          current = id;
+    let ticking = false;
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const scrollY = window.scrollY + 120;
+        let current = ids[0];
+        for (const id of ids) {
+          const el = document.getElementById(id);
+          if (el && el.offsetTop <= scrollY) current = id;
         }
-      }
-      setActiveId(current);
+        setActiveId(current);
+        ticking = false;
+      });
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -40,7 +41,11 @@ export default function SideToc() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (!visible) return null;
+  // Signal to CSS that TOC is visible
+  useEffect(() => {
+    document.documentElement.setAttribute('data-toc', 'visible');
+    return () => document.documentElement.removeAttribute('data-toc');
+  }, []);
 
   return (
     <aside className={styles.toc}>
@@ -54,7 +59,7 @@ export default function SideToc() {
             title={s.label}
           >
             <span className={styles.dot} />
-            <span className={styles.label}>{s.icon} {s.label}</span>
+            <span className={styles.label}>{s.icon} <span className={styles.labelText}>{s.label}</span></span>
           </button>
         ))}
       </nav>

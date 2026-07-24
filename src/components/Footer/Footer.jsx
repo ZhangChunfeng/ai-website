@@ -16,7 +16,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className={styles.footer}>
+    <footer className={`${styles.footer} site-footer`}>
       <div className={styles.inner}>
         <div className={styles.top}>
           <div className={styles.brand}>

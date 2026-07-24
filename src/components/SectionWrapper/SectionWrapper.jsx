@@ -8,7 +8,7 @@ export default function SectionWrapper({ id, children, alt = false }) {
     <section
       id={id}
       ref={ref}
-      className={`${styles.section} reveal ${alt ? 'section-alt' : ''}`}
+      className={`${styles.section} reveal ${alt ? 'section-alt' : ''} content-section`}
     >
       <div className={styles.inner}>
         {children}

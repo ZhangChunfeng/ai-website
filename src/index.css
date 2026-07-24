@@ -130,6 +130,21 @@ html {
   background: var(--color-bg-alt);
 }
 
+/* SideToc visible: give content right margin */
+@media (min-width: 1101px) {
+  [data-toc="visible"] .content-section,
+  [data-toc="visible"] .site-footer {
+    padding-right: calc(var(--space-lg) + 180px);
+  }
+}
+
+@media (max-width: 1400px) and (min-width: 1101px) {
+  [data-toc="visible"] .content-section,
+  [data-toc="visible"] .site-footer {
+    padding-right: calc(var(--space-lg) + 60px);
+  }
+}
+
 /* --- Base Styles --- */
 body {
   font-family: var(--font-sans);
