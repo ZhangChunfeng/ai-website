@@ -53,6 +53,17 @@
   animation-delay: -6s;
 }
 
+/* Light theme orbs — stronger opacity for visible glow */
+:global([data-theme="light"]) .orb1 {
+  background: rgba(108, 92, 231, 0.2);
+}
+:global([data-theme="light"]) .orb2 {
+  background: rgba(0, 206, 201, 0.18);
+}
+:global([data-theme="light"]) .orb3 {
+  background: rgba(253, 121, 168, 0.15);
+}
+
 @keyframes orbFloat {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(30px, -30px) scale(1.05); }
@@ -208,4 +219,30 @@
   .orb1 { width: 300px; height: 300px; }
   .orb2 { width: 250px; height: 250px; }
   .orb3 { width: 200px; height: 200px; }
+}
+
+/* Light theme hero adjustments */
+:global([data-theme="light"]) .hero {
+  background: linear-gradient(180deg, #F0F2FF 0%, #F8F9FC 100%);
+}
+
+:global([data-theme="light"]) .char {
+  background: linear-gradient(135deg, #1A1A2E 0%, var(--color-primary) 50%, var(--color-secondary) 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+:global([data-theme="light"]) .gridOverlay {
+  background-image:
+    linear-gradient(rgba(108, 92, 231, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(108, 92, 231, 0.04) 1px, transparent 1px);
+}
+
+:global([data-theme="light"]) .scrollMouse {
+  border-color: #B0B0C0;
+}
+
+:global([data-theme="light"]) .scrollDot {
+  background: var(--color-primary);
 }

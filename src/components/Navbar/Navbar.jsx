@@ -4,7 +4,7 @@ import useSmoothScroll from '../../hooks/useSmoothScroll';
 import navItems from '../../data/navigation';
 import styles from './Navbar.module.css';
 
-export default function Navbar() {
+export default function Navbar({ theme, onToggleTheme }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
@@ -15,10 +15,23 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      // Close mobile menu when scrolling
+      if (isMobileOpen) setIsMobileOpen(false);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobileOpen]);
+
+  // Close mobile menu on resize (back to desktop)
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 900 && isMobileOpen) {
+        setIsMobileOpen(false);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMobileOpen]);
 
   const handleNavClick = (id) => {
     scrollTo(id);
@@ -52,17 +65,33 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Mobile toggle */}
-        <button
-          className={`${styles.hamburger} ${isMobileOpen ? styles.hamburgerOpen : ''}`}
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
-          aria-label="菜单"
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+        {/* Theme toggle + hamburger */}
+        <div className={styles.actions}>
+          <button
+            className={styles.themeBtn}
+            onClick={onToggleTheme}
+            aria-label="切换主题"
+            title={theme === 'dark' ? '切换亮色模式' : '切换暗色模式'}
+          >
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </button>
+
+          <button
+            className={`${styles.hamburger} ${isMobileOpen ? styles.hamburgerOpen : ''}`}
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
+            aria-label="菜单"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </div>
+
+      {/* Mobile menu overlay */}
+      {isMobileOpen && (
+        <div className={styles.overlay} onClick={() => setIsMobileOpen(false)} />
+      )}
 
       {/* Mobile menu */}
       <div className={`${styles.mobileMenu} ${isMobileOpen ? styles.mobileMenuOpen : ''}`}>

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import SectionWrapper from './components/SectionWrapper/SectionWrapper';
@@ -28,11 +28,33 @@ function ScrollProgress() {
   return <div id="scroll-progress" className="scroll-progress" style={{ width: '0%' }} />;
 }
 
+// Theme toggle
+const THEME_KEY = 'ai-website-theme';
+
+function getInitialTheme() {
+  try {
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved) return saved;
+  } catch {}
+  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+}
+
 export default function App() {
+  const [theme, setTheme] = useState(getInitialTheme);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem(THEME_KEY, theme); } catch {}
+  }, [theme]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+  }, []);
+
   return (
     <>
       <ScrollProgress />
-      <Navbar />
+      <Navbar theme={theme} onToggleTheme={toggleTheme} />
       <main className={styles.main}>
         <Hero />
         <SectionWrapper id="history">
@@ -44,10 +66,10 @@ export default function App() {
         <SectionWrapper id="applications">
           <AIApplications />
         </SectionWrapper>
-        <SectionWrapper id="companies">
+        <SectionWrapper id="companies" alt>
           <AICompanies />
         </SectionWrapper>
-        <SectionWrapper id="prompts" alt>
+        <SectionWrapper id="prompts">
           <PromptEngineering />
         </SectionWrapper>
         <Footer />
