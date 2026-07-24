@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useScrollSpy from '../../hooks/useScrollSpy';
 import useSmoothScroll from '../../hooks/useSmoothScroll';
 import navItems from '../../data/navigation';
@@ -7,31 +7,36 @@ import styles from './Navbar.module.css';
 export default function Navbar({ theme, onToggleTheme, onOpenSearch }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const mobileOpenRef = useRef(false);
+  mobileOpenRef.current = isMobileOpen;
 
   const sectionIds = navItems.map((item) => item.id);
   const activeId = useScrollSpy(sectionIds);
   const scrollTo = useSmoothScroll();
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      // Close mobile menu when scrolling
-      if (isMobileOpen) setIsMobileOpen(false);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 50);
+        if (mobileOpenRef.current) setIsMobileOpen(false);
+        ticking = false;
+      });
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobileOpen]);
+  }, []); // No dependencies - stable listener
 
-  // Close mobile menu on resize (back to desktop)
+  // Close mobile menu on resize
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 1000 && isMobileOpen) {
-        setIsMobileOpen(false);
-      }
+      if (window.innerWidth > 1000) setIsMobileOpen(false);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [isMobileOpen]);
+  }, []);
 
   const handleNavClick = (id) => {
     scrollTo(id);

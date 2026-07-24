@@ -20,12 +20,17 @@ import styles from './App.module.css';
 function ScrollProgress() {
   useEffect(() => {
     const bar = document.getElementById('scroll-progress');
+    let ticking = false;
     const handleScroll = () => {
-      if (!bar) return;
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      bar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        if (!bar) { ticking = false; return; }
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? window.scrollY / docHeight : 0;
+        bar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress))})`;
+        ticking = false;
+      });
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
