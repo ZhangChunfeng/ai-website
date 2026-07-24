@@ -1,0 +1,171 @@
+/* --- Definitions grid --- */
+.defGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.defCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.defCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+}
+
+.defIcon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.defTerm {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text);
+}
+
+.defDesc {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+/* --- Timeline --- */
+.timelineSection {
+  margin-top: var(--space-xl);
+}
+
+.timelineTitle {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  font-size: 1.3rem;
+}
+
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: 100%;
+}
+
+.timelineLine {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--color-primary) 10%, var(--color-secondary) 90%, transparent);
+  transform: translateX(-50%);
+}
+
+.timelineItem {
+  position: relative;
+  width: 50%;
+  padding: 0 var(--space-xl) var(--space-lg);
+}
+
+.timelineItem.left {
+  left: 0;
+  text-align: right;
+  padding-right: var(--space-xl);
+}
+
+.timelineItem.right {
+  left: 50%;
+  text-align: left;
+  padding-left: var(--space-xl);
+}
+
+.timelineDot {
+  position: absolute;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  border: 3px solid var(--color-bg);
+  box-shadow: 0 0 0 3px var(--color-primary);
+  z-index: 1;
+}
+
+.timelineItem.left .timelineDot {
+  right: -7px;
+}
+
+.timelineItem.right .timelineDot {
+  left: -7px;
+}
+
+.timelineCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.timelineCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.timelineYear {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-secondary);
+  background: rgba(0, 206, 201, 0.1);
+  padding: 2px var(--space-sm);
+  border-radius: 4px;
+  margin-bottom: var(--space-sm);
+}
+
+.timelineEventTitle {
+  font-size: 1.1rem;
+  margin-bottom: var(--space-sm);
+  color: var(--color-text);
+}
+
+.timelineDesc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .defGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .timelineLine {
+    left: 18px;
+  }
+
+  .timelineItem,
+  .timelineItem.left,
+  .timelineItem.right {
+    width: 100%;
+    left: 0;
+    text-align: left;
+    padding-left: 50px;
+    padding-right: 0;
+  }
+
+  .timelineItem.left .timelineDot,
+  .timelineItem.right .timelineDot {
+    left: 11px;
+    right: auto;
+  }
+}

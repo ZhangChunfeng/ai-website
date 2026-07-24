@@ -1,0 +1,29 @@
+/* --- Section --- */
+.section {
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+/* Inner container for max-width constraint */
+.inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* Reveal animation */
+:global(.reveal) {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+:global(.reveal-visible) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-xl) var(--space-md);
+  }
+}

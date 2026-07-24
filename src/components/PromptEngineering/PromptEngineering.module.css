@@ -1,0 +1,174 @@
+/* --- Tips grid --- */
+.tipsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.tipCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.tipCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--color-primary);
+}
+
+.tipIcon {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.tipTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+.tipDesc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+/* --- Examples section --- */
+.examplesSection {
+  margin-bottom: var(--space-2xl);
+}
+
+.examplesTitle {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  font-size: 1.3rem;
+}
+
+.examplesList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.examplePair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+/* --- Example cards --- */
+.exampleCard {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.exampleCard.bad {
+  background: rgba(253, 121, 168, 0.05);
+  border-color: rgba(253, 121, 168, 0.25);
+}
+
+.exampleCard.good {
+  background: rgba(0, 206, 201, 0.05);
+  border-color: rgba(0, 206, 201, 0.25);
+}
+
+.exampleHeader {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.exampleLabel {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.examplePrompt {
+  padding: var(--space-md);
+  flex: 1;
+}
+
+.examplePrompt code {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+  display: block;
+}
+
+.exampleNote {
+  padding: var(--space-sm) var(--space-md) var(--space-md);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  border-top: 1px solid var(--color-border);
+}
+
+.exampleNote strong {
+  color: var(--color-text-secondary);
+}
+
+/* --- Summary --- */
+.summary {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.summaryTitle {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  font-size: 1.3rem;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.summaryItem {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.summaryItem strong {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--color-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.summaryItem p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .tipsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .examplePair {
+    grid-template-columns: 1fr;
+  }
+
+  .summaryGrid {
+    grid-template-columns: 1fr;
+  }
+}
