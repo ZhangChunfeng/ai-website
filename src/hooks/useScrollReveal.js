@@ -22,7 +22,7 @@ export default function useScrollReveal(threshold = 0.1) {
       },
       {
         threshold,
-        rootMargin: '0px 0px -50px 0px', // trigger slightly before visible
+        rootMargin: '0px 0px -80px 0px', // trigger earlier for smoother reveal
       }
     );
 

@@ -148,6 +148,17 @@ html {
   }
 }
 
+/* --- Focus styles (keyboard accessibility) --- */
+:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 /* --- Base Styles --- */
 body {
   font-family: var(--font-sans);
