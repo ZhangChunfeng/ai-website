@@ -32,8 +32,12 @@ export default function SearchBar({ isOpen, onClose }) {
   useEffect(() => {
     if (isOpen) {
       setQuery('');
+      document.body.style.overflow = 'hidden';
       setTimeout(() => inputRef.current?.focus(), 100);
+    } else {
+      document.body.style.overflow = '';
     }
+    return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
   const results = useMemo(() => {

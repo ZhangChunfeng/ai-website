@@ -53,14 +53,14 @@ export default function Glossary() {
           {filtered.length === 0 ? (
             <p className={styles.noResult}>未找到匹配的术语</p>
           ) : (
-            <div className={styles.termsList}>
+            <dl className={styles.termsList}>
               {filtered.map((g) => (
                 <div key={g.term} className={styles.termItem}>
                   <dt className={styles.termName}>{g.term}</dt>
                   <dd className={styles.termDef}>{g.def}</dd>
                 </div>
               ))}
-            </div>
+            </dl>
           )}
         </div>
       )}

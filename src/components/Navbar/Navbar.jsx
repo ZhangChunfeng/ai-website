@@ -25,7 +25,7 @@ export default function Navbar({ theme, onToggleTheme, onOpenSearch }) {
   // Close mobile menu on resize (back to desktop)
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 900 && isMobileOpen) {
+      if (window.innerWidth > 1000 && isMobileOpen) {
         setIsMobileOpen(false);
       }
     };
