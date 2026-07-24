@@ -5,6 +5,7 @@ import SectionWrapper from './components/SectionWrapper/SectionWrapper';
 import AIHistory from './components/AIHistory/AIHistory';
 import AIModels from './components/AIModels/AIModels';
 import AIApplications from './components/AIApplications/AIApplications';
+import AICompanies from './components/AICompanies/AICompanies';
 import PromptEngineering from './components/PromptEngineering/PromptEngineering';
 import Footer from './components/Footer/Footer';
 import BackToTop from './components/BackToTop/BackToTop';
@@ -42,6 +43,9 @@ export default function App() {
         </SectionWrapper>
         <SectionWrapper id="applications">
           <AIApplications />
+        </SectionWrapper>
+        <SectionWrapper id="companies">
+          <AICompanies />
         </SectionWrapper>
         <SectionWrapper id="prompts" alt>
           <PromptEngineering />
