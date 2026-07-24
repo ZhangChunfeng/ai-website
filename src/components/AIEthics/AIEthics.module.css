@@ -1,0 +1,87 @@
+/* --- Principles --- */
+.principlesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
+.principleCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  text-align: center;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.principleCard:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primary);
+}
+
+.principleIcon { font-size: 1.8rem; display: block; margin-bottom: var(--space-sm); }
+.principleTitle { font-size: 0.95rem; color: var(--color-text); display: block; margin-bottom: var(--space-xs); }
+.principleDesc { font-size: 0.82rem; color: var(--color-text-muted); margin-bottom: 0; line-height: 1.6; }
+
+/* --- Topics --- */
+.topicsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: var(--space-lg);
+}
+
+.topicCard {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.topicCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+}
+
+.topicHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.topicIcon { font-size: 1.3rem; }
+.topicTitle { font-size: 1.1rem; color: var(--color-text); margin: 0; }
+
+.topicSeverity {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.severityCritical {
+  background: rgba(253, 121, 168, 0.15);
+  color: var(--color-accent);
+}
+
+.severityHigh {
+  background: rgba(253, 203, 110, 0.15);
+  color: var(--color-accent-light);
+}
+
+.topicDesc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  margin-bottom: 0;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .principlesGrid { grid-template-columns: repeat(2, 1fr); }
+  .topicsGrid { grid-template-columns: 1fr; }
+}

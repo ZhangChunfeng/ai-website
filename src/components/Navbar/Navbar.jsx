@@ -4,7 +4,7 @@ import useSmoothScroll from '../../hooks/useSmoothScroll';
 import navItems from '../../data/navigation';
 import styles from './Navbar.module.css';
 
-export default function Navbar({ theme, onToggleTheme }) {
+export default function Navbar({ theme, onToggleTheme, onOpenSearch }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
@@ -67,6 +67,16 @@ export default function Navbar({ theme, onToggleTheme }) {
 
         {/* Theme toggle + hamburger */}
         <div className={styles.actions}>
+          <button
+            className={styles.searchBtn}
+            onClick={onOpenSearch}
+            aria-label="搜索"
+            title="搜索 (Ctrl+K)"
+          >
+            <span className={styles.searchIcon}>🔍</span>
+            <span className={styles.searchHint}>Ctrl+K</span>
+          </button>
+
           <button
             className={styles.themeBtn}
             onClick={onToggleTheme}

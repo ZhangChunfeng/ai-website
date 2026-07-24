@@ -1,0 +1,135 @@
+/* --- Search --- */
+.searchWrap {
+  max-width: 500px;
+  margin: 0 auto var(--space-lg);
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.searchInput:focus {
+  border-color: var(--color-primary);
+}
+
+.searchInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* --- Alphabet nav --- */
+.alphaNav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: var(--space-lg);
+}
+
+.alphaBtn {
+  min-width: 32px;
+  height: 32px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+  transition: all var(--transition-fast);
+}
+
+.alphaBtn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary-light);
+}
+
+.alphaBtnActive {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+/* --- Terms by letter --- */
+.termsByLetter {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.letterGroup {
+  margin-bottom: var(--space-lg);
+}
+
+.letterHeading {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-primary-light);
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 2px solid var(--color-border);
+}
+
+/* --- Terms list --- */
+.termsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.results {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.noResult {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: var(--space-xl);
+}
+
+.termItem {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-md) var(--space-lg);
+  transition: border-color var(--transition-fast);
+}
+
+.termItem:hover {
+  border-color: var(--color-primary-light);
+}
+
+.termName {
+  font-weight: 700;
+  color: var(--color-secondary);
+  font-size: 0.95rem;
+  margin-bottom: var(--space-xs);
+}
+
+.termDef {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .alphaBtn {
+    min-width: 28px;
+    height: 28px;
+    font-size: 0.78rem;
+  }
+  .termItem {
+    padding: var(--space-sm) var(--space-md);
+  }
+}

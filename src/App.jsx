@@ -1,13 +1,17 @@
 import { useState, useEffect, useCallback } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
+import SearchBar from './components/SearchBar/SearchBar';
+import SideToc from './components/SideToc/SideToc';
 import SectionWrapper from './components/SectionWrapper/SectionWrapper';
 import AIHistory from './components/AIHistory/AIHistory';
 import AIModels from './components/AIModels/AIModels';
 import AIApplications from './components/AIApplications/AIApplications';
 import AICompanies from './components/AICompanies/AICompanies';
+import AIEthics from './components/AIEthics/AIEthics';
 import AITutorials from './components/AITutorials/AITutorials';
 import PromptEngineering from './components/PromptEngineering/PromptEngineering';
+import Glossary from './components/Glossary/Glossary';
 import Footer from './components/Footer/Footer';
 import BackToTop from './components/BackToTop/BackToTop';
 import styles from './App.module.css';
@@ -42,6 +46,7 @@ function getInitialTheme() {
 
 export default function App() {
   const [theme, setTheme] = useState(getInitialTheme);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -52,10 +57,29 @@ export default function App() {
     setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
   }, []);
 
+  // Keyboard shortcut: Ctrl+K to open search
+  useEffect(() => {
+    const handleKey = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+      if (e.key === 'Escape') setSearchOpen(false);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, []);
+
   return (
     <>
       <ScrollProgress />
-      <Navbar theme={theme} onToggleTheme={toggleTheme} />
+      <Navbar
+        theme={theme}
+        onToggleTheme={toggleTheme}
+        onOpenSearch={() => setSearchOpen(true)}
+      />
+      <SearchBar isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+      <SideToc />
       <main className={styles.main}>
         <Hero />
         <SectionWrapper id="history">
@@ -70,11 +94,17 @@ export default function App() {
         <SectionWrapper id="companies" alt>
           <AICompanies />
         </SectionWrapper>
-        <SectionWrapper id="tutorials">
+        <SectionWrapper id="ethics">
+          <AIEthics />
+        </SectionWrapper>
+        <SectionWrapper id="tutorials" alt>
           <AITutorials />
         </SectionWrapper>
-        <SectionWrapper id="prompts" alt>
+        <SectionWrapper id="prompts">
           <PromptEngineering />
+        </SectionWrapper>
+        <SectionWrapper id="glossary" alt>
+          <Glossary />
         </SectionWrapper>
         <Footer />
       </main>
